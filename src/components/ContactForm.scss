@@ -1,0 +1,23 @@
+.contact-form-section-container{
+    h1, span {
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+   span {
+    font-weight: 700;
+   }
+
+   .email-input {
+    width: 400px;
+    margin: 1.25rem 0;
+    border-bottom: 2px solid #161412;
+
+    input {
+        width: 100%;
+        border: none;
+    }
+
+
+   }
+
+}

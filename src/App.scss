@@ -112,7 +112,7 @@
 
 
   .menu-container {
-    display: flex;
+    display: none;
     position: fixed;
     top:0;
     left:0;
@@ -129,6 +129,7 @@
     transform:translateX(-360deg);
    
     &.expanded {
+      display: block;
       opacity:1;
       transform:translateX(0);
     }

@@ -13,10 +13,10 @@ import React from 'react'
                 Открийте света през обектива ми и 
                 се потопете в богатството на моментите.Ние създаваме не просто снимки,
                  а истории - вълнуващи и вечни. Всяка фотография е пътешествие в емоциите, 
-                които не можем да изразим с думи.
+                които не можем да изразим с думи.{"  "}
                 </p>
               </div>
-              <div className='btns-wrapper'>
+              <div className='btns-wrapper px-4 d-flex align-items-center'>
                 <a href="/">Read my blog</a>
                 <Button variant = 'secondary'>Learn more</Button>
 
