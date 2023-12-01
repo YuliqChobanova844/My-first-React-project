@@ -8,6 +8,7 @@ import InformationSection from './components/InformationSection';
 import ImagesCollection from './components/ImagesCollection';
 import ContactForm from './components/ContactForm';
 import {useState} from 'react';
+import './components/ContactForm.scss'
 
 
 
@@ -28,7 +29,7 @@ function App() {
         <Container className = 'footer-section'>
           <Row>
           <div className=''>
-          <img src = 'assets/icons/photographer_7902426' ></img>
+          <img src={require('./assets/images/photographer logo_7902426.png')} width="700" height="670" alt="cam"/>
           </div>
           </Row>
           <Row className = 'my-3'>
