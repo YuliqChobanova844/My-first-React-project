@@ -7,8 +7,10 @@ import MenuOverlay from './components/MenuOverlay';
 import InformationSection from './components/InformationSection';
 import ImagesCollection from './components/ImagesCollection';
 import ContactForm from './components/ContactForm';
+import Footer from './components/Footer';
 import {useState} from 'react';
 import './components/ContactForm.scss'
+import './components/Footer.scss'
 
 
 
@@ -39,6 +41,7 @@ function App() {
 
           </Row>
         </Container>
+        <Footer/>
       </Container>
     </div>
   );
