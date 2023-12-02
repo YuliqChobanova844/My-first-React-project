@@ -1,33 +1,32 @@
+import { Link } from '@mui/material';
 import { useState } from 'react';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import Nav from 'react-bootstrap/Nav';
+
+
+
 
 function MenuOverlay() {
-  const [key, setKey] = useState('home');
+ 
 
   return (
-    <Tabs
-      id="controlled-tab-example"
-      activeKey={key}
-      onSelect={(k) => setKey(k)}
-      className="mb-3"
-    >
-      <Tab eventKey="home" title="Начало">
-        
-      </Tab>
-      <Tab eventKey="profile" title="Галерия">
-        
-      </Tab>
-      <Tab eventKey="contact" title="Цени" disabled>
-        
-      </Tab>
-      <Tab eventKey="home" title="Ваучери">
-        
-      </Tab>
-      <Tab eventKey="home" title="Контакти">
-        
-      </Tab>
-    </Tabs>
+    <Nav variant="tabs" defaultActiveKey="/home">
+      <Nav.Item>
+        <Nav.Link href="/home">Начало</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link-1" href = "/gallery">Галерия</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link-2" href = "/prices">Цени</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link-3" href = "/vouchers">Ваучери</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link-4" href = "/contacts">Контакти</Nav.Link>
+      </Nav.Item>
+      
+    </Nav>
   );
 }
 

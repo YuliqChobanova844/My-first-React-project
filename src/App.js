@@ -1,3 +1,6 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+
 
 import './App.scss';
 import HeroSection from '../src/components/HeroSection';
@@ -8,6 +11,7 @@ import InformationSection from './components/InformationSection';
 import ImagesCollection from './components/ImagesCollection';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
+import FooterSection from './components/FooterSection';
 import {useState} from 'react';
 import './components/ContactForm.scss'
 import './components/Footer.scss'
@@ -16,34 +20,27 @@ import './components/Footer.scss'
 
 
 
+
 function App() {
   const [navbarOpen, setNavbarOpen] = useState(false);
   return (
+    <Router>
     <div className="App">
      <Container>
       <Header navbarOpen = {navbarOpen} setNavbarOpen = {setNavbarOpen}/>
       
         <MenuOverlay navbarOpen = {navbarOpen} setNavbarOpen = {setNavbarOpen}/>
-        
         <HeroSection/>
         <InformationSection/>
-        <ImagesCollection/>
-        <Container className = 'footer-section'>
-          <Row>
-          <div className=''>
-          <img src={require('./assets/images/photographer logo_7902426.png')} width="700" height="670" alt="cam"/>
-          </div>
-          </Row>
-          <Row className = 'my-3'>
-            <Col>
-            <ContactForm/>
-            </Col>
-
-          </Row>
-        </Container>
+        <Routes>
+        <Route path="/gallery" element={<ImagesCollection/>} />
+        <Route path="/contacts" element={<FooterSection/>} />
+        
+        </Routes>
         <Footer/>
       </Container>
     </div>
+    </Router>
   );
 }
 
