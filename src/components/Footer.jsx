@@ -8,6 +8,7 @@ import {
 const Footer = () => {
     return(
         <div class="social-container">
+           <img src={require('../assets/images/blackframe.png')} width="70" height="100" alt="cam"/> 
         <h3>Последвайте ни</h3>
         <a href="https://www.facebook.com/miro.chobanov/"
           className="youtube social">

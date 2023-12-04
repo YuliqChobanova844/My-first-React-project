@@ -12,6 +12,7 @@ import ImagesCollection from './components/ImagesCollection';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import FooterSection from './components/FooterSection';
+import Voucher from './components/Voucher';
 import {useState} from 'react';
 import './components/ContactForm.scss'
 import './components/Footer.scss'
@@ -35,7 +36,7 @@ function App() {
         <Routes>
         <Route path="/gallery" element={<ImagesCollection/>} />
         <Route path="/contacts" element={<FooterSection/>} />
-        
+        <Route path="/vouchers" element={<Voucher/>} />
         </Routes>
         <Footer/>
       </Container>
