@@ -1,21 +1,28 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 
 import './App.scss';
-import HeroSection from '../src/components/HeroSection';
-import { Container, Row, Col } from 'react-bootstrap';
-import {Header} from "../src/components/Header";
-import MenuOverlay from './components/MenuOverlay';
-import InformationSection from './components/InformationSection';
-import ImagesCollection from './components/ImagesCollection';
-import ContactForm from './components/ContactForm';
-import Footer from './components/Footer';
-import FooterSection from './components/FooterSection';
-import Voucher from './components/Voucher';
+import HeroSection from '../src/components/hero section/HeroSection';
+import { Container } from 'react-bootstrap';
+import {Header} from "../src/components/header/Header";
+import MenuOverlay from './components/menu overlay/MenuOverlay';
+import InformationSection from '../src/components/information section/InformationSection';
+import ImagesCollection from '../src/components/image collection/ImagesCollection';
+import PricesList from './components/prices list/PricesList';
+
+
+
+import Footer from './components/footer/Footer';
+import FooterSection from './components/footer section/FooterSection';
+import Voucher from './components/voucher/Voucher';
 import {useState} from 'react';
-import './components/ContactForm.scss'
-import './components/Footer.scss'
+
+
+import '../src/components/contact form/ContactForm.scss'
+import './components/footer/Footer.scss'
+import '../src/components/prices list/PricesList.scss'
 
 
 
@@ -24,24 +31,31 @@ import './components/Footer.scss'
 
 function App() {
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const location = useLocation()
+  const isNotRoutePath = ['/gallery', '/contacts', '/vouchers'].indexOf(location.pathname) === -1;
+
+
   return (
-    <Router>
+   
     <div className="App">
      <Container>
       <Header navbarOpen = {navbarOpen} setNavbarOpen = {setNavbarOpen}/>
       
         <MenuOverlay navbarOpen = {navbarOpen} setNavbarOpen = {setNavbarOpen}/>
-        <HeroSection/>
-        <InformationSection/>
-        <Routes>
-        <Route path="/gallery" element={<ImagesCollection/>} />
-        <Route path="/contacts" element={<FooterSection/>} />
-        <Route path="/vouchers" element={<Voucher/>} />
-        </Routes>
+        {isNotRoutePath && (
+          <>
+            <HeroSection />
+            <InformationSection />
+          </>
+        )}
+        {location.pathname === '/gallery' && <ImagesCollection />}
+        {location.pathname === '/contacts' && <FooterSection />}
+        {location.pathname === '/vouchers' && <Voucher />}
+        {location.pathname === '/prices' && <PricesList />}
         <Footer/>
       </Container>
     </div>
-    </Router>
+    
   );
 }
 
