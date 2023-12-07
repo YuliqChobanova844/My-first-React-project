@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
+import {create} from '../../services/voucherService'
+import {useNavigate} from 'react-router-dom';
 
 
-const VoucherForm = () => {
+export const VoucherForm = () => {
   const [service, setService] = useState('');
   const [description, setDescription] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Тук може да се напише логика за изпращане на данните до сървъра
+   
     const voucherData = { service, description, expiryDate };
-    console.log('Изпратена заявка:', voucherData);
-    // Можете да използвате fetch или друг метод за изпращане на данните до сървъра
+
+    try {
+      const result = await create(voucherData)
+    navigate('/home')
+    } catch (error) {
+      console.log(error);
+    }
+
+    
+    
   };
 
   return (
@@ -36,7 +47,7 @@ const VoucherForm = () => {
       </label>
       <br />
       <label className='term'>
-        Изберете срок на ваучера:
+        Дата за заснемане:
         <input
           type="text"
           value={expiryDate}

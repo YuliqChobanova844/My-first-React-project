@@ -1,27 +1,24 @@
 .social-container {
-    background: #636262;
-    padding: 25px 50px;
-    height: 200px;
-  }
-  a.social {
-    margin: 0 1rem;
-    transition: transform 250ms;
-    display: inline-block;
-  }
-  a.social:hover {
-    transform: translateY(-2px);
-  }
- 
-  
-  a.facebook {
-    color: blue;
-    font-size: 22px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-    }
-  
- 
-  
-  a.instagram {
-    color: black;
-  }
+  text-align: center;
+  background-color: darkgray;
+}
+
+.social-container img {
+  width: 70px;
+  height: 100px;
+}
+
+.social-container h3 {
+  margin-top: 10px;
+}
+
+.social {
+  margin-top: 10px;
+}
+
+.social:hover {
+  transform: translateY(-2px);
+}

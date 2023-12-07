@@ -8,6 +8,7 @@ export const Header = (navbarOpen, setNavbarOpen)=>{
         <div className='logo'>Добре дошли</div>
         <div >
           <Button className='login-btn'variable = 'primary'>Login </Button>{' '}
+          <Button className='register-btn'variable = 'primary'>Register </Button>{' '}
           <Button  className ='logout-btn' variable = 'secondary'>Logout </Button>{' '}
         </div>
         
