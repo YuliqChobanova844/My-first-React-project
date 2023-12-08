@@ -15,7 +15,9 @@ import PricesList from './components/prices list/PricesList';
 import './components/prices list/PricesList.scss'
 import CreateVoucher from './components/create voucher/CreateVoucher';
 import './components/create voucher/CreateVoucher.scss'
-
+import  Login  from './components/login/Login';
+import './components/login/Login.scss'
+import { AuthContext } from './contexts/AuthContext';
 
 
 
@@ -36,13 +38,23 @@ import './components/footer/Footer.scss'
 
 
 function App() {
+  const [auth,setAuth] = useState({});
+
+  const onLoginSubmit = async (data) => {
+    
+    console.log(data);
+  }
+
+
+
+
   const [navbarOpen, setNavbarOpen] = useState(false);
   const location = useLocation()
-  const isNotRoutePath = ['/gallery', '/contacts', '/vouchers', '/prices'].indexOf(location.pathname) === -1;
+  const isNotRoutePath = ['/gallery', '/contacts', '/vouchers', '/prices', '/login'].indexOf(location.pathname) === -1;
 
 
   return (
-   
+   <AuthContext.Provider value={{onLoginSubmit}}>
     <div className="App">
      <Container>
       <Header navbarOpen = {navbarOpen} setNavbarOpen = {setNavbarOpen}/>
@@ -58,10 +70,16 @@ function App() {
         {location.pathname === '/contacts' && <FooterSection />}
         {location.pathname === '/vouchers' && <CreateVoucher />}
         {location.pathname === '/prices' && <PricesList />}
+        {location.pathname === '/login' && (
+  <>
+    <Login />
+    
+  </>
+)}
         <Footer/>
       </Container>
     </div>
-    
+    </AuthContext.Provider>
   );
 }
 

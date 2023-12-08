@@ -23,10 +23,19 @@ function MenuOverlay() {
         <Nav.Link eventKey="link-3" href = "/vouchers">Ваучери</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="link-5" href = "/reserved/vouchers">Резервирани ваучери</Nav.Link>
+        <Nav.Link eventKey="link-4" href = "/reserved/vouchers">Резервирани ваучери</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="link-4" href = "/contacts">Контакти</Nav.Link>
+        <Nav.Link eventKey="link-5" href = "/contacts">Контакти</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link-6" href = "/login">Login</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link-7" href = "/register">Register</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link eventKey="link-4" href = "/logout">Logout</Nav.Link>
       </Nav.Item>
       
       
