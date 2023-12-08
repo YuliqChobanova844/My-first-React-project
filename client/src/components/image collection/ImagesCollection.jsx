@@ -23,11 +23,7 @@ return (
 }
 
 </ul>
-<div className='d-flex nb-2'>
-    <a href="/" className='mx-auto fs-3'>
-        Вижте повече
-    </a>
-</div>
+
 </>
 )
 }
