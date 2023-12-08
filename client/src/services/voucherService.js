@@ -1,4 +1,34 @@
+import * as request from '../lib/request'
+
+
 const basedUrl = 'http://localhost:3030/jsonstore'
+
+
+
+export const getAll = async () => {
+  const response = await fetch(`${basedUrl}/reserved/vouchers`, {
+    method: 'GET',
+    headers: {
+        'content-type': 'application/json'
+    },
+
+  });
+  
+  const result = await response.json();
+
+  return Object.values(result);
+ 
+}
+
+export const getOne = async (voucherId) => {
+  const result = await request.get(`${basedUrl}/vouchers${voucherId}`);
+  return result;
+}
+
+
+
+
+
 
 
 export const create = async (voucherData) => {

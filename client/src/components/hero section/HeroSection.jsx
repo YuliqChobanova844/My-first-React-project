@@ -16,11 +16,6 @@ import React from 'react'
                 които не можем да изразим с думи.{"  "}
                 </p>
               </div>
-              <div className='btns-wrapper px-4 d-flex align-items-center'>
-                <a href="/">Read my blog</a>
-                <Button variant = 'secondary'>Learn more</Button>
-
-             </div>
               </Col>
               <Col xs md = "4">
                 <div className='image-wrapper'></div>

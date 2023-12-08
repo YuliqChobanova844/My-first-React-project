@@ -14,7 +14,7 @@ const LoginFormKeys = {
 
 export default function Login() {
     const {onLoginSubmit} = useContext(AuthContext);
-    const {values, changeHandler} = useForm ({
+    const {values, changeHandler, onSubmit} = useForm ({
      [LoginFormKeys.Email]: '',
      [LoginFormKeys.Password]: '',
 
@@ -23,7 +23,7 @@ export default function Login() {
 
 
 return (
-  <form className="login-form" onSubmit={onLoginSubmit}>
+  <form className="login-form" method="POST" onSubmit={onSubmit}>
   <h2>Login</h2>
   <div className="form-group">
     <label htmlFor="email">Email</label>

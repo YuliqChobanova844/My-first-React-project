@@ -1,19 +1,32 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+import { useEffect } from 'react';
+import { useState } from 'react';
+import * as voucherService from '../../services/voucherService'
+import VoucherItem from './voucher item/VoucherItem';
+
 const Voucher = () => {
+  const [vouchers, setVouchers] = useState([])
+
+   useEffect(() => {
+    voucherService.getAll()
+          .then(result => setVouchers(result));
+   }, [])
+
+
+
+
   return (
-    <Card style={{ width: '30rem', height:'40rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
-      <Card.Body>
-        <Card.Title>Ваучер</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Детайли</Button>
-      </Card.Body>
-    </Card>
+    <div>
+     {vouchers.map(voucher => (
+      <VoucherItem key={voucher._id} {...voucher} />
+     ))}
+
+     {vouchers.length === 0 && (
+      <h3 className='no-reserved-vouchers'>Нямате резервирани ваучери</h3>
+     )}
+    </div>
   );
 }
 

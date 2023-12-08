@@ -1,0 +1,8 @@
+.horizontal-menu {
+    display: flex;
+    flex-wrap: wrap; /* Ако е нужно да се разделат на редове */
+    justify-content: space-between; /* Хоризонтално разпределение */
+    align-items: center; /* Центриране на елементите по вертикалата */
+    /* Допълнителни стилове според нуждите */
+  }
+  
