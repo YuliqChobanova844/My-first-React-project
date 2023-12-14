@@ -11,7 +11,7 @@ import HeroSection from '../src/components/hero section/HeroSection';
 import { Container } from 'react-bootstrap';
 import {Header} from "../src/components/header/Header";
 import MenuOverlay from './components/menu overlay/MenuOverlay';
-import InformationSection from '../src/components/information section/InformationSection';
+
 import ImagesCollection from '../src/components/image collection/ImagesCollection';
 import PricesList from './components/prices list/PricesList';
 import CreateVoucher from './components/create voucher/CreateVoucher'
@@ -29,7 +29,7 @@ import VoucherDetails from './components/voucher details/VoucherDetails';
 import Footer from './components/footer/Footer';
 import FooterSection from './components/footer section/FooterSection';
 
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 
 import '../src/components/contact form/ContactForm.scss'
@@ -41,18 +41,25 @@ import '../src/components/prices list/PricesList.scss'
 
 
 
-
+function setAuth(auth) {
+  localStorage.setItem('auth', JSON.stringify(auth));
+}
+function getAuth() {
+  const stateStr = localStorage.getItem('auth');
+  return stateStr ? JSON.parse(stateStr) : {};
+}
 
 function App() {
-  const [auth,setAuth] = useState({});
+  const auth = getAuth();
+  // const [auth, setAuth] = useState({});
   const navigate = useNavigate();
 
-  const onLoginSubmit = async (data) => {
+  const onLoginSubmit = async (values) => {
     try {
-      const result = await authService.login(data);
+      const result = await authService.login(values.email, values.password);
     setAuth(result);
-
-    navigate('/')
+   navigate('/')
+    
     } catch (error) {
       return error;
     }
@@ -67,7 +74,8 @@ function App() {
     }
      try {
       const result = await authService.register(registerData);
-    setAuth(result);
+      setAuth(result);
+      console.log(result)
 
     navigate('/')
     } catch (error) {
@@ -77,8 +85,9 @@ function App() {
 
 const onLogout = async() => {
    await authService.logout()
-   setAuth({});
+  setAuth({});
    localStorage.clear()
+   
 
 
 };
@@ -91,7 +100,7 @@ const onLogout = async() => {
     userId:auth._id,
     token:auth.accessToken,
     userEmail: auth.email,
-    isAuthenticated:  !!auth.accessToken,
+    isAuthenticated: !!auth.accessToken
     
   }
 
@@ -112,7 +121,7 @@ const onLogout = async() => {
         {isNotRoutePath && (
           <>
             <HeroSection />
-            <InformationSection />
+            
           </>
         )}
         {location.pathname === '/gallery' && <ImagesCollection />}

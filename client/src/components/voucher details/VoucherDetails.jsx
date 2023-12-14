@@ -7,7 +7,13 @@ import * as voucherService from '../../services/voucherService'
 
 
 
-const VoucherDetails = () => {
+const VoucherDetails = ({
+ 
+  service,
+  description, 
+  expiryDate, 
+  
+}) => {
 const {voucherId} = useParams();
 const [voucher, setVoucher] = useState({})
 

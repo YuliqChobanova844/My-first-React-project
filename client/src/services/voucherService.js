@@ -6,7 +6,7 @@ const basedUrl = 'http://localhost:3030/jsonstore'
 
 
 export const getAll = async () => {
-  const response = await fetch(`${basedUrl}/reserved/vouchers`, {
+  const response = await fetch(`${basedUrl}/vouchers`, {
     method: 'GET',
     headers: {
         'content-type': 'application/json'
@@ -21,7 +21,7 @@ export const getAll = async () => {
 }
 
 export const getOne = async (voucherId) => {
-  const result = await request.get(`${basedUrl}/vouchers${voucherId}`);
+  const result = await request.get(`${basedUrl}/vouchers/${voucherId}`);
   return result;
 }
 

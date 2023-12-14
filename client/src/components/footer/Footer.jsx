@@ -8,15 +8,15 @@ import {
 const Footer = () => {
     return(
         <div class="social-container">
-           <img src={require('../../assets/images/blackframe.png')} width="70" height="100" alt="cam"/> 
-        <h3>Последвайте ни</h3>
+           
+        <h3 color='yellow'>Последвайте ни</h3>
         <a href="https://www.facebook.com/miro.chobanov/"
           className="youtube social">
-          <FontAwesomeIcon icon={faFacebook} size="2x" />
+          <FontAwesomeIcon icon={faFacebook} size="4x" color='white'/>
         </a>
         <a href="https://www.instagram.com/miroslavchobanow/"
           className="youtube social">
-          <FontAwesomeIcon icon={faInstagram} size="2x" />
+          <FontAwesomeIcon icon={faInstagram} size="4x" color='white'/>
         </a>
   </div>
     )

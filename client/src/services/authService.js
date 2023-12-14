@@ -2,10 +2,19 @@ import * as request from '../lib/request'
 
 const baseUrl = 'http://localhost:3030/users'
 
-export const login = (data) => 
-    request.post(`${baseUrl}/login`, data)
-
-
+export const login = async (email, password) => {
+    const result = request.post(`${baseUrl}/login`, {
+        email,
+        password,
+    });
+    return result;
+}
 export const register = (data) => request.post(`${baseUrl}/register`, data);
 
-export const logout = () => request.get(`${baseUrl}/logout`);
+export  function logout (token){
+   fetch(`${baseUrl}/logout`, {
+    headers:{
+        'X-Authorization':token
+    }
+   });
+}
