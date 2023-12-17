@@ -1,8 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext';
-import * as authService from './services/authService';
+import {authServiceFactory} from './services/authService';
 import { useNavigate } from 'react-router-dom';
+import {voucherServicefactory} from './services/voucherService'
 
 
 
@@ -23,7 +24,7 @@ import './components/register/Register.scss'
 import { Logout } from './components/logout/Logout';
 import Voucher from './components/voucher/Voucher';
 import VoucherDetails from './components/voucher details/VoucherDetails';
-
+import './components/voucher details/VoucherDetails.scss'
 
 
 import Footer from './components/footer/Footer';
@@ -34,13 +35,12 @@ import {useEffect, useState} from 'react';
 
 import '../src/components/contact form/ContactForm.scss'
 import './components/footer/Footer.scss'
-
 import '../src/components/prices list/PricesList.scss'
 
 
 
 
-
+//Local storage for jwt 
 function setAuth(auth) {
   localStorage.setItem('auth', JSON.stringify(auth));
 }
@@ -51,13 +51,43 @@ function getAuth() {
 
 function App() {
   const auth = getAuth();
-  // const [auth, setAuth] = useState({});
+   //const [auth, setAuth] = useState({});
   const navigate = useNavigate();
+  const [vouchers,setVouchers] = useState([])
+  const voucherService = voucherServicefactory(auth.accessToken);
+  const authService = authServiceFactory(auth.accessToken);
+  
+  //Vouchers
+  
+  useEffect(() => {
+    voucherService.getAll()
+          .then(result => {
+            setVouchers(result)
+          .then(error => console.log(error))
+          });
+   }, [])
 
-  const onLoginSubmit = async (values) => {
+
+
+
+const onCreateVoucherSubmit = async (data) => {
     try {
-      const result = await authService.login(values.email, values.password);
-    setAuth(result);
+    const newVoucher = await voucherService.create(data);
+    setVouchers(state => [...state, newVoucher])
+    navigate('/reserved/vouchers')
+    } catch (error) {
+      console.log(error);
+    }
+
+};
+
+
+
+//Authentication
+  const onLoginSubmit = async (data) => {
+    try {
+  const result = await authService.login(data);
+  setAuth(result);
    navigate('/')
     
     } catch (error) {
@@ -65,7 +95,8 @@ function App() {
     }
   };
 
-   const onRegisterSubmit = async (values) => {
+   
+  const onRegisterSubmit = async (values) => {
     const {confirmPassword, ...registerData} = values;
     if (confirmPassword !== registerData.password){
       return ;
@@ -75,9 +106,7 @@ function App() {
      try {
       const result = await authService.register(registerData);
       setAuth(result);
-      console.log(result)
-
-    navigate('/')
+      navigate('/')
     } catch (error) {
       return error;
     }
@@ -86,10 +115,6 @@ function App() {
 const onLogout = async() => {
    await authService.logout()
   setAuth({});
-   localStorage.clear()
-   
-
-
 };
 
 
@@ -100,42 +125,41 @@ const onLogout = async() => {
     userId:auth._id,
     token:auth.accessToken,
     userEmail: auth.email,
-    isAuthenticated: !!auth.accessToken
+    isAuthenticated: !!auth.accessToken,
     
   }
 
 
-  const [navbarOpen, setNavbarOpen] = useState(false);
-  const location = useLocation()
-  const isNotRoutePath = ['/gallery', '/contacts', '/vouchers','/prices', '/login', '/register', '/logout', '/vouchers/:voucherId'].indexOf(location.pathname) === -1;
+  
+ 
 
 
   return (
    
     <AuthContext.Provider value={context}>
     <div className="App">
-     <Container>
-      <Header navbarOpen = {navbarOpen} setNavbarOpen = {setNavbarOpen}/>
+     
+      <Header />
       
-        <MenuOverlay navbarOpen = {navbarOpen} setNavbarOpen = {setNavbarOpen}/>
-        {isNotRoutePath && (
-          <>
-            <HeroSection />
-            
-          </>
-        )}
-        {location.pathname === '/gallery' && <ImagesCollection />}
-        {location.pathname === '/contacts' && <FooterSection />}
-        {location.pathname === '/vouchers' && <CreateVoucher />}
-        {location.pathname === '/reserved/vouchers' && <Voucher />}
-        {location.pathname === '/vouchers/:voucherId' && <VoucherDetails />}
-        {location.pathname === '/prices' && <PricesList />}
-        {location.pathname === '/login' &&   <Login />}
-        {location.pathname === '/register' && <RegistrationForm />}
-        {location.pathname === '/logout' && <Logout />}
+        <MenuOverlay />
+        <HeroSection />
+        <main id = "main-content">
+         <Routes>   
+        
+        
+        <Route path= '/gallery' element =  {<ImagesCollection />}/>
+        <Route path= '/contacts' element =  {<FooterSection />}  />
+        <Route path= '/vouchers' element = { <CreateVoucher onCreateVoucherSubmit={onCreateVoucherSubmit}/>} />
+        <Route path= '/reserved/vouchers' element = { <Voucher  vouchers ={vouchers}/>} />
+        <Route path= '/vouchers/:voucherId' element = { <VoucherDetails />} />
+        <Route path= '/prices' element = {<PricesList />} />
+        <Route path= '/login' element = {<Login  onLoginSubmit={onLoginSubmit}/>} />
+        <Route path= '/register' element = { <RegistrationForm />} />
+        <Route path= '/logout' element = { <Logout />} />
+        </Routes>
+        </main>
         <Footer/>
-      </Container>
-    </div>
+      </div>
     </AuthContext.Provider>
   );
 }

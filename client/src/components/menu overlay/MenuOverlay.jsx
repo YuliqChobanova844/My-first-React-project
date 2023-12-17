@@ -31,7 +31,7 @@ function MenuOverlay() {
           <Nav.Item>
             <Nav.Link eventKey="link-" href="/reserved/vouchers" style={{ fontSize: '22px', padding: '10px 20px' }}>Резервирани ваучери</Nav.Link>
           </Nav.Item>
-          
+          <span>{userEmail}</span>
           <Nav.Item>
             <Nav.Link eventKey="link-8" href="/logout" style={{ fontSize: '22px', padding: '10px 20px' }}>Logout</Nav.Link>
           </Nav.Item>

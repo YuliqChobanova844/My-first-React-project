@@ -1,35 +1,22 @@
-import React, { useState } from 'react';
-import {create} from '../../services/voucherService'
-import {useNavigate} from 'react-router-dom';
+import React from 'react';
+import { useForm } from '../../hooks/useForm';
 
 
-export const VoucherForm = () => {
-  const [service, setService] = useState('');
-  const [description, setDescription] = useState('');
-  const [expiryDate, setExpiryDate] = useState('');
-  const navigate = useNavigate();
+export const VoucherForm = ({
+  onCreateVoucherSubmit,
+}) => {
+  const {values,changeHandler, onSubmit} = useForm ({
+   service:'',
+   description:'',
+   expiryDate:'',
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-   
-    const voucherData = { service, description, expiryDate };
-
-    try {
-      const result = await create(voucherData)
-    navigate('/home')
-    } catch (error) {
-      console.log(error);
-    }
-
-    
-    
-  };
-
+}, onCreateVoucherSubmit);
+  
   return (
-    <form className = 'voucherForm'onSubmit={handleSubmit}>
+    <form className = 'voucherForm' method = 'post' onSubmit={onSubmit}>
       <label className='select'>
         Изберете вид услуга:
-        <select value={service} onChange={(e) => setService(e.target.value)}>
+        <select value={values.service} name = 'service' onChange={changeHandler}>
           <option value="">Изберете услуга</option>
           <option value="Събития">Събития</option>
           <option value="Сватбен ден">Сватбен ден</option>
@@ -38,20 +25,22 @@ export const VoucherForm = () => {
         </select>
       </label>
       <br />
-      <label className='description'>
+      <label className='description' >
         Описание на ваучера:
         <textarea className='desVoucher'
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          name = 'description'
+          value={values.description}
+          onChange={changeHandler}
         ></textarea>
       </label>
       <br />
-      <label className='term'>
+      <label className='term' >
         Дата за заснемане:
         <input
           type="text"
-          value={expiryDate}
-          onChange={(e) => setExpiryDate(e.target.value)}
+          name = 'expiryDate'
+          value={values.expiryDate}
+          onChange={changeHandler}
         />
       </label>
       <br />

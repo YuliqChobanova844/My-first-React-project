@@ -1,22 +1,16 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 
 import { useEffect } from 'react';
 import { useState } from 'react';
-import * as voucherService from '../../services/voucherService'
+import {voucherServicefactory} from '../../services/voucherService'
+import { useService } from '../../hooks/useService';
 import VoucherItem from './voucher item/VoucherItem';
 
-const Voucher = () => {
-  const [vouchers, setVouchers] = useState([])
-
-   useEffect(() => {
-    voucherService.getAll()
-          .then(result => setVouchers(result));
-   }, [])
-
-
-
-
+const Voucher = ({
+  vouchers,
+}) => {
+  
+   
+  
   return (
     <div>
      {vouchers.map(voucher => (

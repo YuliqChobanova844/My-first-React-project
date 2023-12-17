@@ -1,47 +1,40 @@
-import * as request from '../lib/request'
+import {requestFactory} from '../lib/request'
 
 
-const basedUrl = 'http://localhost:3030/jsonstore'
+const basedUrl = 'http://localhost:3030/data';
 
 
 
-export const getAll = async () => {
-  const response = await fetch(`${basedUrl}/vouchers`, {
-    method: 'GET',
-    headers: {
-        'content-type': 'application/json'
-    },
-
-  });
   
-  const result = await response.json();
 
-  return Object.values(result);
+export const voucherServicefactory = (token) => {
+const request = requestFactory(token);
+
+
+const getAll = async () => {
+  const result = await request.get(`${basedUrl}/reserved/vouchers`);
+  const vouchers = Object.values(result);
+  return vouchers;
  
-}
+};
 
-export const getOne = async (voucherId) => {
+ const getOne = async (voucherId) => {
   const result = await request.get(`${basedUrl}/vouchers/${voucherId}`);
   return result;
-}
+  
+};
 
 
+ const create = async (data) => {
+ const result = request.post(`${basedUrl}/vouchers`, data);
+ return result;
 
+};
 
-
-
-
-export const create = async (voucherData) => {
- const response = await fetch(`${basedUrl}/vouchers`, {
-    method: 'POST',
-    headers: {
-        'content-type': 'application/json'
-    },
-    body: JSON.stringify(voucherData)
-  });
-
-  const result = await response.json();
-
-  return result;
-
+return {
+  getAll,
+  getOne,
+  create,
+};
+  
 }
