@@ -26,7 +26,14 @@ const request = async (method, token, url, data) => {
       return {};
   }
 
-  const result = await response.json();
+  let result = {};
+
+  try {
+    result = await response.json(); // Опит за парсване на отговора като JSON
+  } catch (error) {
+    // Отговорът не може да бъде обработен като JSON
+    console.error('Error parsing response as JSON:', error);
+  }
 
   if (!response.ok) {
       throw result;

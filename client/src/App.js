@@ -51,7 +51,7 @@ function getAuth() {
 
 function App() {
   const auth = getAuth();
-   //const [auth, setAuth] = useState({});
+  //const [auth, setAuth] = useState({});
   const navigate = useNavigate();
   const [vouchers,setVouchers] = useState([])
   const voucherService = voucherServicefactory(auth.accessToken);
@@ -63,7 +63,6 @@ function App() {
     voucherService.getAll()
           .then(result => {
             setVouchers(result)
-          .then(error => console.log(error))
           });
    }, [])
 
@@ -115,6 +114,7 @@ const onCreateVoucherSubmit = async (data) => {
 const onLogout = async() => {
    await authService.logout()
   setAuth({});
+  localStorage.clear();
 };
 
 
@@ -153,7 +153,7 @@ const onLogout = async() => {
         <Route path= '/reserved/vouchers' element = { <Voucher  vouchers ={vouchers}/>} />
         <Route path= '/vouchers/:voucherId' element = { <VoucherDetails />} />
         <Route path= '/prices' element = {<PricesList />} />
-        <Route path= '/login' element = {<Login  onLoginSubmit={onLoginSubmit}/>} />
+        <Route path= '/login' element = {<Login />} />
         <Route path= '/register' element = { <RegistrationForm />} />
         <Route path= '/logout' element = { <Logout />} />
         </Routes>
